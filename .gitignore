@@ -1,0 +1,18 @@
+# Local Netlify folder
+.netlify
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 备份文件夹
+desktop_backup_20260319/
+
+# WorkBuddy
+.codebuddy/
+.playwright-cli/
+
+# 其他不相关文件
+feishu-login.png
+gomoku.html
+window.scrollBy(0
