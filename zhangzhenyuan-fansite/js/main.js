@@ -27,9 +27,10 @@ function initTabs() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // 如果是跳转到其他 .html 页面，不阻止默认行为
+            // 如果是跳转到其他 .html 页面，让浏览器正常跳转
             if (href && href.endsWith('.html')) {
-                return; // 让浏览器正常跳转
+                window.location.href = href;
+                return;
             }
             
             e.preventDefault();
