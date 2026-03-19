@@ -1,3 +1,9 @@
 [build]
   publish = "zhangzhenyuan-fansite"
   command = ""
+
+[[redirects]]
+  from = "/photos"
+  to = "/photos.html"
+  status = 200
+  force = true
