@@ -116,7 +116,28 @@ function viewPhoto(url, title) {
 
 // 加载照片（兼容旧版本）
 function loadPhotos() {
+    console.log('loadPhotos called');
     initPhotos();
+}
+
+// 初始化
+function initPhotos() {
+    console.log('initPhotos called, container:', document.getElementById('photoGallery'));
+    const container = document.getElementById('photoGallery');
+    if (!container) {
+        console.error('photoGallery container not found!');
+        return;
+    }
+    
+    // 检查URL参数决定显示哪个分类
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    
+    if (category && photoCategories[category]) {
+        renderCategoryPhotos(category);
+    } else {
+        renderCategoryList();
+    }
 }
 
 // 刷新照片
