@@ -1,8 +1,3 @@
 [build]
   publish = "zhangzhenyuan-fansite"
   command = ""
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

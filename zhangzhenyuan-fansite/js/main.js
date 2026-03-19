@@ -27,8 +27,8 @@ function initTabs() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // 如果是跳转到外部页面（如 photos.html），不阻止默认行为
-            if (href && (href.endsWith('.html') || href.includes('#'))) {
+            // 如果是跳转到其他 .html 页面，不阻止默认行为
+            if (href && href.endsWith('.html')) {
                 return; // 让浏览器正常跳转
             }
             
@@ -40,8 +40,13 @@ function initTabs() {
             
             // 添加active类到当前
             this.classList.add('active');
-            const targetId = this.getAttribute('data-tab');
-            document.getElementById(targetId).classList.add('active');
+            const targetId = this.getAttribute('data-tab') || href.replace('#', '');
+            
+            // 找到对应的 tab 内容并显示
+            const targetTab = document.getElementById(targetId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
             
             // 根据tab加载对应内容
             if (targetId === 'news') {
@@ -49,8 +54,22 @@ function initTabs() {
             } else if (targetId === 'photos') {
                 loadPhotos();
             }
+            
+            // 更新 URL hash（不刷新页面）
+            if (href && href.startsWith('#')) {
+                history.pushState(null, null, href);
+            }
         });
     });
+    
+    // 页面加载时检查 URL hash
+    if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        const link = document.querySelector(`.nav-links a[data-tab="${hash}"]`);
+        if (link) {
+            link.click();
+        }
+    }
 }
 
 // 格式化日期
